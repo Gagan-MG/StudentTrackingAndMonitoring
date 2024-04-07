@@ -1,12 +1,11 @@
 import express, { response } from 'express';
-// import con from './StudentTrackingAndMonitoring/Server/Utils/db.js';
 import con from '../Utils/db.js';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router()
 
 router.post('/adminlogin', (req, res) => {
-    const sql = "SELECT * from admin Where email = ? and password = ?";
+    const sql = "SELECT * FROM admin Where email = ? and password = ?";
     con.query(sql, [req.body.email, req.body.password], (err, result) => {
         if (err) return res.json({ loginStatus: false, Error: "Query Error" });
         if (result.length > 0) {
@@ -23,5 +22,21 @@ router.post('/adminlogin', (req, res) => {
         }
     });
 });
+
+router.get('/category', (req, res) => {
+    const sql = "SELECT * FROM category";
+    con.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"})
+        return res.json({Status: true, Result: result})
+    })
+})
+
+router.post('/add_category', (req, res) => {
+    const sql = "INSERT INTO category (name) VALUES (?)"
+    con.query(sql, [req.body.category], (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"})
+        return res.json({Status: true})
+    })
+})
 
 export { router as adminRoute }
