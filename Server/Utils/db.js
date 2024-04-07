@@ -1,4 +1,4 @@
-import mysql from 'mysql';
+import mysql from 'mysql'
 
 const con = mysql.createConnection({
     host: "localhost",
@@ -8,9 +8,11 @@ const con = mysql.createConnection({
 })
 
 con.connect(function(err) {
-    if (err) {
-        console.log("Error connecting to MySQL server.");
+    if(err) {
+        console.log("connection error")
     } else {
-        console.log("Connected!");
+        console.log("Connected")
     }
 })
+
+export default con;
