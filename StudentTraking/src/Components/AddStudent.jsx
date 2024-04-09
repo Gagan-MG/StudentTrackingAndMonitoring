@@ -95,17 +95,19 @@ const AddStudent = () => {
                 setStudent({ ...student, password: e.target.value })
               }
             />
-            <label for="inputSalary" className="form-label">
+          </div>
+          <div className="col-12">
+            <label for="inputAge" className="form-label">
               Age
             </label>
             <input
               type="text"
               className="form-control rounded-0"
-              id="inputSalary"
+              id="inputAge"
               placeholder="Enter Age"
               autoComplete="off"
               onChange={(e) =>
-                setStudent({ ...student, salary: e.target.value })
+                setStudent({ ...student, age: e.target.value })
               }
             />
           </div>

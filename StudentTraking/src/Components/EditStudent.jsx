@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const EditStudent = () => {
@@ -7,13 +7,12 @@ const EditStudent = () => {
     const [student, setStudent] = useState({
         name: '',
         email: '',
-        password: '',
         age: '',
         address: '',
         category_id: '',
-        image: ''
       })
       const [category, setCategory] =useState([])
+      const navigate = useNavigate()
 
       useEffect(() => {
         axios.get('http://localhost:3000/auth/category')
@@ -27,15 +26,34 @@ const EditStudent = () => {
 
         axios.get('http://localhost:3000/auth/student/'+id)
         .then(result => {
-            console.log(result.data)
+            setStudent({
+                ...student,
+                name: result.data.Result[0].name,
+                email: result.data.Result[0].email,
+                address: result.data.Result[0].address,
+                age: result.data.Result[0].age,
+                category_id : result.data.Result[0].category_id,
+            })
         }).catch(err => console.log(err))
     }, [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.put('http://localhost:3000/auth/edit_student/'+id, student)
+        .then((result)=>{
+            if(result.data.Status){
+                navigate('/dashboard/student')
+            } else {
+                alert(result.data.Error)
+            }
+        }).catch(err => console.log(err))
+    }
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
         <h3 className="text-center">Edit Student</h3>
-        <form className="row g-1">
+        <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12">
             <label for="inputName" className="form-label">
               Name
@@ -45,6 +63,7 @@ const EditStudent = () => {
               className="form-control rounded-0"
               id="inputName"
               placeholder="Enter Name"
+              value={student.name}
               onChange={(e) =>
                 setStudent({ ...student, name: e.target.value })
               }
@@ -60,35 +79,25 @@ const EditStudent = () => {
               id="inputEmail4"
               placeholder="Enter Email"
               autoComplete="off"
+              value={student.email}
               onChange={(e) =>
                 setStudent({ ...student, email: e.target.value })
               }
             />
           </div>
           <div className="col-12">
-            <label for="inputPassword4" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control rounded-0"
-              id="inputPassword4"
-              placeholder="Enter Password"
-              onChange={(e) =>
-                setStudent({ ...student, password: e.target.value })
-              }
-            />
-            <label for="inputSalary" className="form-label">
+            <label for="inputAge" className="form-label">
               Age
             </label>
             <input
               type="text"
               className="form-control rounded-0"
-              id="inputSalary"
+              id="inputAge"
               placeholder="Enter Age"
               autoComplete="off"
+              value={student.age}
               onChange={(e) =>
-                setStudent({ ...student, salary: e.target.value })
+                setStudent({ ...student, age: e.target.value })
               }
             />
           </div>
@@ -102,6 +111,7 @@ const EditStudent = () => {
               id="inputAddress"
               placeholder="1234 Main St"
               autoComplete="off"
+              value={student.address}
               onChange={(e) =>
                 setStudent({ ...student, address: e.target.value })
               }
@@ -117,18 +127,6 @@ const EditStudent = () => {
                 return <option value={c.id}>{c.name}</option>;
               })}
             </select>
-          </div>
-          <div className="col-12 mb-3">
-            <label className="form-label" for="inputGroupFile01">
-              Select Image
-            </label>
-            <input
-              type="file"
-              className="form-control rounded-0"
-              id="inputGroupFile01"
-              name="image"
-              onChange={(e) => setStudent({...student, image: e.target.files[0]})}
-            />
           </div>
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100">
