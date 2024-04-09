@@ -1,21 +1,21 @@
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import React, {useEffect, useState } from "react"
-import { useNavigate } from 'react-router-dom'
 
-const AddStudent = () => {
-  const [student, setStudent] = useState({
-    name: '',
-    email: '',
-    password: '',
-    age: '',
-    address: '',
-    category_id: '',
-    image: ''
-  })
-  const [category, setCategory] = useState([])
-  const navigate  = useNavigate()
+const EditStudent = () => {
+    const {id} = useParams()
+    const [student, setStudent] = useState({
+        name: '',
+        email: '',
+        password: '',
+        age: '',
+        address: '',
+        category_id: '',
+        image: ''
+      })
+      const [category, setCategory] =useState([])
 
-    useEffect(() => {
+      useEffect(() => {
         axios.get('http://localhost:3000/auth/category')
         .then(result => {
             if(result.data.Status) {
@@ -24,35 +24,18 @@ const AddStudent = () => {
                 alert(result.data.Error)
             }
         }).catch(err => console.log(err))
+
+        axios.get('http://localhost:3000/auth/student/'+id)
+        .then(result => {
+            console.log(result.data)
+        }).catch(err => console.log(err))
     }, [])
-
-    const handleSubmit = (e) =>{
-      e.preventDefault()
-      const formData = new FormData();
-      formData.append('name', student.name);
-      formData.append('email', student.email);
-      formData.append('password', student.password);
-      formData.append('age', student.age);
-      formData.append('address', student.address);
-      formData.append('image', student.image);
-      formData.append('category_id', student.category_id);
-
-      axios.post('http://localhost:3000/auth/add_student', formData)
-      .then(result => {
-        if(result.data.Status) {
-          navigate('/dashboard/student')
-      } else {
-          alert(result.data.Error)
-      }
-      })
-      .catch(err => console.log(err))
-    }
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
-        <h3 className="text-center">Add Student</h3>
-        <form className="row g-1" onSubmit={handleSubmit}>
+        <h3 className="text-center">Edit Student</h3>
+        <form className="row g-1">
           <div className="col-12">
             <label for="inputName" className="form-label">
               Name
@@ -149,7 +132,7 @@ const AddStudent = () => {
           </div>
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100">
-              Add Student
+              Edit Student
             </button>
           </div>
         </form>
@@ -158,4 +141,4 @@ const AddStudent = () => {
   )
 }
 
-export default AddStudent
+export default EditStudent
