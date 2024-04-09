@@ -110,4 +110,51 @@ router.put('/edit_student/:id', (req, res) => {
         return res.json({Status: true, Result: result})
     })
 })
+
+router.delete('/delete_student/:id', (req, res) => {
+    const id = req.params.id;
+    const sql ="DELETE FROM student WHERE id = ?";
+    con.query(sql, [id], (err,result)=>{
+        if(err)return res.json({Status : false ,Error:"Delete Failed!"})
+        return res.json({Status:true, Result: result})
+    })
+})
+
+router.get('/admin_count', (req, res) => {
+    const sql = "SELECT count(id) as admin from admin";
+    con.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"+err})
+        return res.json({Status: true, Result: result})
+    })
+})
+
+router.get('/student_count', (req, res) => {
+    const sql = "SELECT count(id) as student from student";
+    con.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"+err})
+        return res.json({Status: true, Result: result})
+    })
+})
+
+router.get('/age_count', (req, res) => {
+    const sql = "SELECT sum(age) as ageOFStu from student";
+    con.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"+err})
+        return res.json({Status: true, Result: result})
+    })
+})
+
+router.get('/admin_records', (req, res) => {
+    const sql = "SELECT * from admin"
+    con.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"+err})
+        return res.json({Status: true, Result: result})
+    })
+})
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('token')
+    return res.json({Status: true})
+})
+
 export { router as adminRoute }
