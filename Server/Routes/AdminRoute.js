@@ -95,5 +95,19 @@ router.get('/student/:id', (req, res) => {
     })
 })
 
-
+router.put('/edit_student/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `UPDATE student set name = ?, email = ?, age = ?, address = ?, category_id = ? WHERE id = ?`;
+        const values = [
+            req.body.name,
+            req.body.email,
+            req.body.age, 
+            req.body.address,
+            req.body.category_id
+        ]
+    con.query(sql,[...values, id], (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"+err})
+        return res.json({Status: true, Result: result})
+    })
+})
 export { router as adminRoute }
