@@ -2,6 +2,8 @@ import express, { response } from 'express';
 import con from '../Utils/db.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import multer from 'multer';
+import path from 'path';
 
 const router = express.Router()
 
@@ -40,7 +42,21 @@ router.post('/add_category', (req, res) => {
     })
 })
 
-router.post('/add_student', (req, res) => {
+//img upload
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'Public/Images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+    }
+})
+const upload = multer({
+    storage: storage
+})
+//end of img upload
+
+router.post('/add_student',upload.single('image'), (req, res) => {
     const sql = `INSERT INTO student 
     (name, email, password, address, age, image, category_id) 
     VALUES (?)`;
@@ -51,15 +67,33 @@ router.post('/add_student', (req, res) => {
             req.body.email,
             hash,
             req.body.address,
-            req.body.age,
-            req.body.image,
+            req.body.age, 
+            req.file.filename,
             req.body.category_id
         ]
         con.query(sql, [values], (err, result) => {
-            if(err) return res.json({Status: false, Error: "Quer Error 1"})
+            if(err) return res.json({Status: false, Error: err})
             return res.json({Status: true})
         })
     })
 })
+
+router.get('/student', (req, res) => {
+    const sql = "SELECT * FROM student";
+    con.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"})
+        return res.json({Status: true, Result: result})
+    })
+})
+
+router.get('/student/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM student WHERE id = ?";
+    con.query(sql, [id], (err, result) => {
+        if(err) return res.json({Status: false, Error: "Query Error"})
+        return res.json({Status: true, Result: result})
+    })
+})
+
 
 export { router as adminRoute }
