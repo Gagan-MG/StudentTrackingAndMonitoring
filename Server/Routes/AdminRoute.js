@@ -1,6 +1,7 @@
 import express, { response } from 'express';
 import con from '../Utils/db.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const router = express.Router()
 
@@ -36,6 +37,28 @@ router.post('/add_category', (req, res) => {
     con.query(sql, [req.body.category], (err, result) => {
         if(err) return res.json({Status: false, Error: "Query Error"})
         return res.json({Status: true})
+    })
+})
+
+router.post('/add_student', (req, res) => {
+    const sql = `INSERT INTO student 
+    (name, email, password, address, age, image, category_id) 
+    VALUES (?)`;
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if(err) return res.json({Status: false, Error: "Query Error"})
+        const values = [
+            req.body.name,
+            req.body.email,
+            hash,
+            req.body.address,
+            req.body.age,
+            req.body.image,
+            req.body.category_id
+        ]
+        con.query(sql, [values], (err, result) => {
+            if(err) return res.json({Status: false, Error: "Quer Error 1"})
+            return res.json({Status: true})
+        })
     })
 })
 
