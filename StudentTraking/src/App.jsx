@@ -16,6 +16,9 @@ import StudentDetail from './Components/StudentDetail';
 import { useEffect } from 'react';
 import axios from 'axios'
 import PrivateRoute from './Components/PrivateRoute';
+import EnterMarks from './Components/EnterMarks';
+import MyDashboard from './Components/MyDashboard';
+import { MyProfile } from './Components/MyProfile';
 
 function App() {
 
@@ -38,6 +41,7 @@ function App() {
         <Route path='/dashboard/add_category' element={<AddCategory />}></Route>
         <Route path='/dashboard/add_student' element={<AddStudent />}></Route>
         <Route path='/dashboard/edit_student/:id' element={<EditStudent />}></Route>        
+        <Route path='/dashboard/enter_marks/:id' element={<EnterMarks />}></Route>
       </Route>
     </Routes>
     </BrowserRouter>

@@ -30,8 +30,14 @@ const Student = () => {
       <div className='d-flex justify-content-center'>
         <h3>Student List</h3>
       </div>
+      {/* <div className="d-flex justify-content-between align-items-center mb-3"> */}
       <Link to="/dashboard/add_student" className='btn btn-success'>
-        Add Student</Link>
+        Add Student
+      </Link>
+      {/* <Link to="/dashboard/enter_marks" className="btn btn-success">
+        Enter Marks
+      </Link> */}
+      {/* </div> */}
       <div className='mt-3'>
         <table className='table'>
           <thead>
@@ -60,7 +66,8 @@ const Student = () => {
                   <td>{e.age}</td>
                   <td>
                     <Link to={`/dashboard/edit_student/` + e.id} className='btn btn-info btn-sm me-2'>Edit</Link>
-                    <button className='btn btn-warning btn-sm' onClick={() => handleDelete(e.id)}>Delete</button>
+                    <button className='btn btn-warning btn-sm me-2' onClick={() => handleDelete(e.id)}>Delete</button>
+                    <Link to={`/dashboard/enter_marks/` +e.id} className="btn btn-success btn-sm">Enter Marks</Link>
                   </td>
                 </tr>
               ))

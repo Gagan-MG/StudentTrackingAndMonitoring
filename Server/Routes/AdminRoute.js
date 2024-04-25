@@ -120,6 +120,22 @@ router.delete('/delete_student/:id', (req, res) => {
     })
 })
 
+
+router.post('/enter_marks/:id', (req, res) => {
+    const studentId = req.params.id;
+    const { subject1, subject2, subject3, subject4, subject5 } = req.body;
+    
+    // Perform any validation if necessary
+    
+    const sql = `UPDATE student SET subject1 = ?, subject2 = ?, subject3 = ?, subject4 = ?, subject5 = ? WHERE id = ?`;
+    const values = [subject1, subject2, subject3, subject4, subject5, studentId];
+
+    con.query(sql, values, (err, result) => {
+        if (err) return res.json({ Status: false, Error: "Query Error" });
+        return res.json({ Status: true });
+    });
+});
+
 router.get('/admin_count', (req, res) => {
     const sql = "SELECT count(id) as admin from admin";
     con.query(sql, (err, result) => {

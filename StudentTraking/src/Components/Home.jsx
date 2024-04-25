@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom"
 
 const Home = () => {
   const [adminTotal, setAdminTotal] = useState(0)
@@ -73,7 +74,7 @@ const Home = () => {
             <h5>{studentTotal}</h5>
           </div>
         </div>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
+        {/* <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
           <div className='text-center pb-1'>
             <h4>Age</h4>
           </div>
@@ -82,7 +83,7 @@ const Home = () => {
             <h5>Total:</h5>
             <h5>{ageTotal}</h5>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className='mt-4 px-5 pt-3'>
         <h3>List of Admins</h3>
@@ -113,6 +114,12 @@ const Home = () => {
             }
           </tbody>
         </table>
+      </div>
+      <div className='text-center' >
+        <h5 class="text-center">Let's looks at the Map</h5>
+        <Link to="https://gpsprojectggh.000webhostapp.com/" className='btn btn-success'>
+        Track Student
+      </Link>
       </div>
     </div>
   )
