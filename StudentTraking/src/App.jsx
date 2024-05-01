@@ -18,17 +18,22 @@ import axios from 'axios'
 import PrivateRoute from './Components/PrivateRoute';
 import EnterMarks from './Components/EnterMarks';
 import MyDashboard from './Components/MyDashboard';
-import { MyProfile } from './Components/MyProfile';
+import MyProfile from './Components/MyProfile';
 
 function App() {
 
   return (
+    <div className='grid-container'>
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Start />}></Route>
       <Route path='/adminlogin' element={<Login />}></Route>
       <Route path='/student_login' element={<StudentLogin />}></Route>
-      <Route path='/student_detail/:id' element={<StudentDetail />}></Route>
+      {/* <Route path='/student_detail/:id' element={<StudentDetail />}></Route> */}
+      <Route path='/student_detail/:id/my_dashboard' element={ <StudentDetail />} >         
+        <Route path='' element={<MyDashboard/>}></Route>
+        <Route path='my_profile' element={<MyProfile/>}></Route>
+      </Route>
       <Route path='/dashboard' element={
         <PrivateRoute>
           <Dashboard />
@@ -42,9 +47,11 @@ function App() {
         <Route path='/dashboard/add_student' element={<AddStudent />}></Route>
         <Route path='/dashboard/edit_student/:id' element={<EditStudent />}></Route>        
         <Route path='/dashboard/enter_marks/:id' element={<EnterMarks />}></Route>
+        {/* <Route path='/dashboard/enter_marks/:id' element={<EnterMarks />}></Route> */}
       </Route>
     </Routes>
     </BrowserRouter>
+    </div>
   )
 }
 

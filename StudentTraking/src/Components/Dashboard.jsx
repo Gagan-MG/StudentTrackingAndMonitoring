@@ -4,6 +4,13 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios'
 
 const Dashboard = () => {
+    const bodyStyle = {
+        margin: 0,
+        padding: 0,
+        backgroundColor: '#1d2634',
+        color: '#9e9ea4',
+        fontFamily: 'Montserrat, sans-serif',
+    };
     const navigate = useNavigate()
     axios.defaults.withCredentials = true
     const handleLogout = () => {
@@ -74,7 +81,7 @@ const Dashboard = () => {
                             <Link
                                 className='nav-link px-0 align-middle text-white'
                             >
-                                <i className='fs-4 bi=power ms-2'></i>
+                                <i className='fs-4 bi-power ms-2'></i>
                                 <span className='ms-2 d-none d-sm-inline'>Logout</span>
                             </Link>
                         </li>

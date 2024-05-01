@@ -17,7 +17,7 @@ const StudentLogin = () => {
     .then(result => {
       if(result.data.loginStatus) {
         localStorage.setItem("valid", true)
-        navigate('/student_detail/'+result.data.id)
+        navigate('/student_detail/'+result.data.id+'/my_dashboard')
       } else {
         setError(result.data.Error)          
       }

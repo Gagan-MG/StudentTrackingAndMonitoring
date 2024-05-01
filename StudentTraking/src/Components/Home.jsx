@@ -5,13 +5,11 @@ import { Link } from "react-router-dom"
 const Home = () => {
   const [adminTotal, setAdminTotal] = useState(0)
   const [studentTotal, setStudentTotal] = useState(0)
-  const [ageTotal, setAgeTotal] = useState(0)
   const [admins, setAdmins] = useState([])
 
   useEffect(() => {
     adminCount();
     studentCount();
-    ageCount();
     AdminRecords();
   }, [])
 
@@ -41,16 +39,6 @@ const Home = () => {
       }
     })
   }
-  const ageCount = () => {
-    axios.get('http://localhost:3000/auth/age_count')
-    .then(result => {
-      if(result.data.Status) {
-        setAgeTotal(result.data.Result[0].ageOFStu)
-      } else {
-        alert(result.data.Error)
-      }
-    })
-  }
   return (
     <div>
       <div className='p-3 d-flex justify-content-around mt-3'>
@@ -74,16 +62,6 @@ const Home = () => {
             <h5>{studentTotal}</h5>
           </div>
         </div>
-        {/* <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Age</h4>
-          </div>
-          <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>{ageTotal}</h5>
-          </div>
-        </div> */}
       </div>
       <div className='mt-4 px-5 pt-3'>
         <h3>List of Admins</h3>

@@ -1,0 +1,31 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: 260px, 1fr, 1fr, 1fr;
+    grid-template-rows: 0.2fr, 3fr;
+    /* grid-template-areas: 
+    'sidebar header header header'
+    'sidebar main main main'; */
+    height: 100vh;
+}
+.body{
+    margin: 0;
+    padding: 0;
+    background-color: #1d2634;
+    color: #9e9ea4;
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.dashboard{
+    display: flex;
+    gap: 20px;
+}
+
+.dashboard--content{
+    background: #fff;
+    flex: 1;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+}

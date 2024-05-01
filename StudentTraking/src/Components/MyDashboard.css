@@ -1,0 +1,150 @@
+.dashboard{
+    display: flex;
+    gap: 20px;
+}
+.dashboard--content{
+    background: #fff;
+    flex: 1;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+}
+
+.content{
+    width: 75%;
+}
+.content--header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header--title{
+    color: #526d82;
+}
+.header--activity{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.search--box{
+    background: #dde6ed;
+    padding: 8px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.search--box input{
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 5px;
+}
+.search--box .icon{
+    color: #969393;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.notify{
+    background-color: #dde6ed;
+    padding: 12px;
+    border-radius: 10px;
+    color: #969393;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card--container{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 2rem;
+}
+.card{
+    flex: 1;
+    background: #dde6ed;
+    padding:  20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.5s ease-in-out;
+    height: 200px;
+}
+.card:hover{
+    transform: scale(1.04);
+    cursor: pointer;
+}
+.card--cover{
+    background: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 20px;
+    color: #969393;
+}
+.card--title{
+    background: #ffffffc0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #526d82;
+    border-radius: 10px;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    border-radius: 50%; /* Makes the image circular */
+    width: 100px; /* Set the default size of the image */
+    height: 100px;
+    margin-right: 20px; /* Add margin to create space between image and details */
+}
+
+.profile-details {
+    /* Add styles for profile details */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #333; /* Text color */
+}
+
+.profile-details h3 {
+    margin: 5px 0; /* Add margin to separate each detail */
+}
+
+
+.profile-details h3 {
+    margin: 5px 0; /* Add margin to separate each detail */
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column; /* Display profile pic and details vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+}
+
+.profile-pic {
+    margin-bottom: 20px; /* Add space between profile pic and details */
+}
+
+.profile-details {
+    color: #050505;
+    font-size: 20px;
+}
+.profile-details h3 {
+    color: #080808;
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-bottom: 10px; /* Add some space between name and email */
+}
+
