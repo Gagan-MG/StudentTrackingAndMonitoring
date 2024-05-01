@@ -120,18 +120,27 @@ router.delete('/delete_student/:id', (req, res) => {
     })
 })
 
-
 router.post('/enter_marks/:id', (req, res) => {
-    const studentId = req.params.id;
+    // const { id } = req.params;
+    const id = req.params.id;
     const { subject1, subject2, subject3, subject4, subject5 } = req.body;
+
+    // Check if all required fields are present
+    if (!subject1 || !subject2 || !subject3 || !subject4 || !subject5 || !id) {
+        return res.status(400).json({ Status: false, Error: "Missing required fields" });
+    }
+
+    const sql = `INSERT INTO studentmarks 
+    (student_id, subject1, subject2, subject3, subject4, subject5) 
+    VALUES (?, ?, ?, ?, ?, ?)`;
     
-    // Perform any validation if necessary
-    
-    const sql = `UPDATE student SET subject1 = ?, subject2 = ?, subject3 = ?, subject4 = ?, subject5 = ? WHERE id = ?`;
-    const values = [subject1, subject2, subject3, subject4, subject5, studentId];
+    const values = [id, subject1, subject2, subject3, subject4, subject5];
 
     con.query(sql, values, (err, result) => {
-        if (err) return res.json({ Status: false, Error: "Query Error" });
+        if (err) {
+            console.error("Error inserting student marks:", err);
+            return res.status(500).json({ Status: false, Error: "Failed to insert student marks" });
+        }
         return res.json({ Status: true });
     });
 });

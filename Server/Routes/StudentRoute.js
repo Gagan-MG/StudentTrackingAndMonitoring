@@ -39,6 +39,15 @@ router.get('/detail/:id', (req, res) => {
     })
 })
 
+router.get('/my_profile/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM student where id = ?"
+    con.query(sql, [id], (err, result) => {
+        if(err) return res.json({Status: false});
+        return res.json(result)
+    })
+  })
+  
 router.get('/logout', (req,res) => {
     res.clearCookie("token");
     return res.json({ Status : true })
