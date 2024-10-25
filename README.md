@@ -28,3 +28,8 @@ Requirements and Steps for HARDWARE
 -----------------------------------
 
 will UPDATE SOON...
+
+
+
+
+https://teams.microsoft.com/l/meetup-join/19%3a44ade6bae4844eb39ce6e834d3a951bf%40thread.tacv2/1708606872770?context=%7b%22Tid%22%3a%22d344fc8a-8286-4945-9a21-49aed506d485%22%2c%22Oid%22%3a%223bb54e23-300e-4964-90bc-a043faafa3a7%22%7d
